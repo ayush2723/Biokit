@@ -60,7 +60,7 @@ BioKit 2 will feature advanced tools integrating data structures and algorithms 
 ## 🤝 Contributing
 Contributions, feedback, and ideas for new tools are welcome! Please open an issue or submit a pull request.
 
-##👤 Author
+## 👤 Author
 Developed by Ayush
 Powered by Biopython & Streamlit
 
