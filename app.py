@@ -6,7 +6,7 @@ from Bio import SeqIO
 
 
 # Set theme before any Streamlit command
-st.set_page_config(page_title="BioKit 1 - DNA Sequence Tools", layout="wide")
+st.set_page_config(page_title="BioKit 1 - DNA Sequence Tools", layout="wide",page_icon="🧬")
 
 # 🔧 Function to encode image to base64 and set background
 def set_bg_image(image_file):
