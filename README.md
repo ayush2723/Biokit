@@ -24,9 +24,16 @@
 2. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
-3. **Run the application**
+3. **Set up virtual environment**
+    ```bash
+    python -m venv venv_name
+4. **Activate Virtual Environment**
+   ```bash
+   .\env\Scripts\Activate.ps1
+5. **Run the application**
    ```bash
    streamlit run app.py
+
 
 
 ## 📁 Project Structure
