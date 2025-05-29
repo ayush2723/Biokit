@@ -1,7 +1,9 @@
 import streamlit as st
 import base64
-import io  # 
+import io  
 from Bio import SeqIO
+
+
 
 # Set theme before any Streamlit command
 st.set_page_config(page_title="BioKit 1 - DNA Sequence Tools", layout="wide")
