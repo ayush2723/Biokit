@@ -244,3 +244,19 @@ with st.container():
         **Use case:**  
         Molecular weight estimation helps in characterizing nucleic acids and calculating reagent concentrations for experiments like gel electrophoresis and mass spectrometry.
         """)
+
+def show_contact():
+    st.markdown("---")
+    st.markdown("""
+        <div style='padding: 10px; background-color: rgba(255,255,255,0.8); border-radius: 10px;'>
+            <h3>📩 Get in Touch</h3>
+            <p>If you have feedback, issues, or ideas, don’t hesitate to contact us!</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:ayush1289sharmastdy@gmail.com">ayush1289sharmastdy@gmail.com</a></li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/ayush2723/Biokit1.git">Open a GitHub Issue</a></li>
+            </ul>
+        </div>
+    """, unsafe_allow_html=True)
+
+# Always show contact section, regardless of stop()
+show_contact()
