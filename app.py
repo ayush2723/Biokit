@@ -98,7 +98,12 @@ input_mode = st.radio(
 )
 
 if input_mode == "Manual input":
-    seq = dna_input_box()
+    with st.form("manual_dna_input"):
+        seq = dna_input_box()
+        submitted = st.form_submit_button("Submit")
+    
+    if not submitted:
+        st.stop()
     if not seq:
         st.info("Please enter a valid DNA sequence (A, T, G, C only).")
         st.stop()
