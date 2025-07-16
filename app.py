@@ -3,10 +3,8 @@ import base64
 import io  
 from Bio import SeqIO
 
-
-
 # Set theme before any Streamlit command
-st.set_page_config(page_title="BioKit 1 - DNA Sequence Tools", layout="wide",page_icon="🧬")
+st.set_page_config(page_title="BioKit 1 - DNA Sequence Tools", layout="wide", page_icon="🧬")
 
 # 🔧 Function to encode image to base64 and set background
 def set_bg_image(image_file):
@@ -20,14 +18,24 @@ def set_bg_image(image_file):
         background-attachment: fixed;
         background-repeat: no-repeat;   
     }}
-    [data-testid = "stHeader"]{{
-            background-color: rgba(0,0,0,0);    
-        }}
+    [data-testid="stHeader"] {{
+        background-color: rgba(0,0,0,0);    
+    }}
+    h1, h3 {{
+        text-align: center;
+        color: #2b4162;
+        font-weight: 700;
+        font-family: 'Segoe UI', sans-serif;
+    }}
+    .stTextArea textarea {{
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }}
     </style>
     """
     st.markdown(bg_css, unsafe_allow_html=True)
 
-# Set the background image (place 'pic1.jpg' in the same folder)
+# Set the background image (leave unchanged)
 set_bg_image("pic1.jpg")
 
 # Import your DNA tools
@@ -52,37 +60,33 @@ from components import display_sequence, dna_input_box, plot_nucleotide_composit
 
 # Page header
 st.markdown("""
-    <h1 style='text-align: center; color: #333;'>🧬BioKit 1</h1>
-    <p style='text-align: center; font-size: 18px; color: #666;'>Simple, Reliable DNA Sequence Utilities.</p>
-    <br>
+    <h1>🧬 BioKit 1</h1>
+    <h3 style='margin-top: -10px;'>Simple, Reliable DNA Sequence Utilities.</h3>
 """, unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-# Tool selector label styled and selectbox without label
+# Tool selector
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     st.markdown("""
-       <div style='text-align: center;'>
-            <label style='font-size: 22px; font-weight: 900; color: #111; display: block; margin-bottom: 8px;font-family: Courier New'>
-                Choose a tool
+        <div style='text-align: center;'>
+            <label style='font-size: 22px; font-weight: 900; color: #111; display: block; margin-bottom: 8px; font-family: Courier New'>
+                Choose a Tool
             </label>
         </div>
     """, unsafe_allow_html=True)
-
-    tool = st.selectbox(
-        "",  
-        [
-            "Reverse Complement",
-            "Complement Sequence",
-            "Codon Frequency",
-            "GC Content",
-            "Transcription (DNA → RNA)",
-            "Translation (DNA → Protein)",
-            "Nucleotide Count",
-            "Find Palindromes",
-            "Melting Temperature",
-            "Molecular Weight",
-        ],
-    )
+    tool = st.selectbox("", [
+        "Reverse Complement",
+        "Complement Sequence",
+        "Codon Frequency",
+        "GC Content",
+        "Transcription (DNA → RNA)",
+        "Translation (DNA → Protein)",
+        "Nucleotide Count",
+        "Find Palindromes",
+        "Melting Temperature",
+        "Molecular Weight",
+    ])
 
 # Input mode selector
 st.markdown("""
@@ -95,6 +99,7 @@ input_mode = st.radio(
     "Choose DNA input mode:",
     ("Manual input", "Upload FASTA file"),
     index=0,
+    horizontal=True
 )
 
 if input_mode == "Manual input":
@@ -111,18 +116,14 @@ if input_mode == "Manual input":
 elif input_mode == "Upload FASTA file":
     uploaded_file = st.file_uploader("Upload a FASTA file", type=["fasta", "fa"])
     if uploaded_file:
-        # Wrap the binary uploaded_file in a text wrapper for SeqIO
         text_file = io.TextIOWrapper(uploaded_file, encoding='utf-8')
-        
         sequences = list(SeqIO.parse(text_file, "fasta"))
         if not sequences:
             st.error("No sequences found in the FASTA file.")
             st.stop()
-        
         seq_options = {seq_rec.id: str(seq_rec.seq) for seq_rec in sequences}
         selected_seq_id = st.selectbox("Select sequence to use", list(seq_options.keys()))
         seq = seq_options[selected_seq_id]
-        
         st.write(f"Using sequence: {selected_seq_id} (length {len(seq)})")
     else:
         st.info("Please upload a FASTA file.")
@@ -168,16 +169,11 @@ with st.container():
         st.write("""
         This graph shows the percentage of guanine (G) and cytosine (C) bases 
         across the DNA sequence, calculated over sliding windows of a chosen size.
-        Peaks represent GC-rich regions, and valleys indicate GC-poor regions.
-
-        Use: GC content affects DNA stability and gene regulation, 
-        and helps identify important genomic features such as promoters or structural domains.
         """)
         plot_gc_distribution(seq)
         st.info("""
         **Use case:**  
         GC-rich regions tend to be more thermally stable and often mark functional regions like promoters and CpG islands.
-        Variation in GC content can influence gene expression and genome organization.
         """)
 
     elif tool == "Transcription (DNA → RNA)":
@@ -233,7 +229,6 @@ with st.container():
         st.info("""
         **Use case:**  
         Melting temperature predicts the stability of DNA duplexes and is essential in PCR primer design and hybridization experiments.
-        It ensures specificity and efficiency in molecular biology protocols.
         """)
 
     elif tool == "Molecular Weight":
@@ -245,6 +240,7 @@ with st.container():
         Molecular weight estimation helps in characterizing nucleic acids and calculating reagent concentrations for experiments like gel electrophoresis and mass spectrometry.
         """)
 
+# Contact section
 def show_contact():
     st.markdown("---")
     st.markdown("""
@@ -258,5 +254,4 @@ def show_contact():
         </div>
     """, unsafe_allow_html=True)
 
-# Always show contact section, regardless of stop()
 show_contact()

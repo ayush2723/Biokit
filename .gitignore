@@ -1,2 +1,24 @@
-venv/
+# Ignore Python cache
 __pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Ignore virtual environments
+venv/
+.venv/
+ENV/
+env/
+
+# Ignore Streamlit's cache
+.streamlit/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.DS_Store
+
+# Ignore Jupyter Notebook checkpoints (if any)
+.ipynb_checkpoints/
+
+# Ignore VSCode settings (optional)
+.vscode/
