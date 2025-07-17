@@ -1,4 +1,4 @@
-from .motif_logic import find_motif_positions
+from .motif_logic import find_motif_positions, highlight_motif
 from biokit2.data.motif_data import COMMON_MOTIFS
 import streamlit as st
 
@@ -15,3 +15,10 @@ def render_motif_finder(sequence: str):
     if motif:
         positions = find_motif_positions(sequence, motif)
         st.markdown(f"**Motif found at positions:** {positions}")
+
+        
+        if positions:
+            highlighted = highlight_motif(sequence, positions, len(motif))
+            st.code(highlighted, language="text")
+        else:
+            st.info("No matches found.")
