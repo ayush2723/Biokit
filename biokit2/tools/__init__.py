@@ -1,4 +1,5 @@
 from .motif_finder import render_motif_finder,highlight_motif,find_motif_positions,calculate_z_array
 from .orf_finder import find_orfs, highlight_orfs,render_orf_finder
 from .splice_side_predictor import find_splice_sites, render_splice_site_predictor
+from .codon_optimization import get_codon_frequency ,generate_codon_heatmap , render_codon_optimizer , optimize_sequence
 
