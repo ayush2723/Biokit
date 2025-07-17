@@ -4,7 +4,7 @@ import streamlit as st
 def render_orf_finder(sequence: str):
     st.subheader("ORF Finder")
     st.markdown("""
-    🔍 **What this tool does:**  
+    **What this tool does:**  
     Finds all Open Reading Frames (ORFs) in the forward strand of the input DNA sequence.  
     An ORF starts with `ATG` and ends at the nearest downstream stop codon (`TAA`, `TAG`, or `TGA`) in-frame.
     """)
