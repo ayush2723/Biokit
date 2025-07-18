@@ -3,3 +3,5 @@ from .orf_finder import find_orfs, highlight_orfs,render_orf_finder
 from .splice_side_predictor import find_splice_sites, render_splice_site_predictor
 from .codon_optimization import get_codon_frequency ,generate_codon_heatmap , render_codon_optimizer , optimize_sequence
 from .microsatellite_finder import find_microsatellites, render_microsatellite_finder
+from .restriction_site import find_restriction_sites,render_restriction_mapper
+from .palindrome_inverted import render_palindrome_inverted
