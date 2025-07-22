@@ -5,3 +5,6 @@ from .codon_optimization import get_codon_frequency ,generate_codon_heatmap , re
 from .microsatellite_finder import find_microsatellites, render_microsatellite_finder
 from .restriction_site import find_restriction_sites,render_restriction_mapper
 from .palindrome_inverted import render_palindrome_inverted
+from .sequence_complexity import render_sequence_complexity_tool
+from .mutation_hotspot import render_mutation_hotspot_tool
+from .primer_design import render_optimal_primer_designer_tool
