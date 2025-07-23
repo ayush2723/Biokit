@@ -3,8 +3,7 @@ from biokit2.tools.sequence_complexity.seq_complexity import (
     sliding_entropy_profile
 )
 import streamlit as st
-import plotly.graph_objects as go
-import plotly.express as px
+import matplotlib.pyplot as plt
 from collections import Counter
 
 
@@ -29,24 +28,21 @@ def render_sequence_complexity_tool(sequence: str):
     step_size = st.slider("Step size", min_value=1, max_value=20, value=5, step=1)
     positions, entropies = sliding_entropy_profile(sequence, window_size, step_size)
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=positions, y=entropies, mode="lines+markers", name="Entropy"))
-    fig.update_layout(
-        xaxis_title="Sequence Position",
-        yaxis_title="Shannon Entropy",
-        title="Local Sequence Complexity (Entropy Profile)",
-        height=400,
-        margin=dict(l=40, r=40, t=60, b=40),
-    )
-    st.plotly_chart(fig, use_container_width=True)
+    # Use Matplotlib for entropy plot
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.plot(positions, entropies, marker='o', linestyle='-', color='royalblue')
+    ax.set_xlabel("Sequence Position")
+    ax.set_ylabel("Shannon Entropy")
+    ax.set_title("Local Sequence Complexity (Entropy Profile)")
+    ax.grid(True)
+    st.pyplot(fig)
 
     with st.expander("🔬 Base Composition"):
         base_counts = Counter(sequence)
-        base_data = {base: base_counts.get(base, 0) for base in "ATGC"}
-        bar_fig = px.bar(
-            x=list(base_data.keys()),
-            y=list(base_data.values()),
-            labels={"x": "Base", "y": "Count"},
-            title="Base Composition"
-        )
-        st.plotly_chart(bar_fig, use_container_width=True)
+        base_data = [base_counts.get(base, 0) for base in "ATGC"]
+
+        fig2, ax2 = plt.subplots(figsize=(4, 3))
+        ax2.bar(["A", "T", "G", "C"], base_data, color=["#2ca02c", "#d62728", "#1f77b4", "#ff7f0e"])
+        ax2.set_ylabel("Count")
+        ax2.set_title("Base Composition")
+        st.pyplot(fig2)
