@@ -37,27 +37,34 @@ def set_bg_image(image_file):
 set_bg_image("images/pic31.jpg")
 
 # Style
-st.markdown("""
+st.markdown(
+    """
     <style>
-    .stApp {
-        background-color: #f5f7fa;
-        font-family: 'Segoe UI', sans-serif;
+    body {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .main {
+        background-color: rgba(255, 255, 255, 0.8); /* semi-transparent content area */
+        padding: 2rem;
+        border-radius: 10px;
     }
     h1, h3 {
-        text-align: center;
-        color: #2b4162;
-        font-weight: 700;
+        font-family: 'Segoe UI', sans-serif;
+        color: #0e1c36;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
     }
-    .stTabs [data-baseweb="tab"] {
-        font-size: 16px;
-        padding: 0.75rem 1.25rem;
-    }
-    .stTextArea textarea {
-        background-color: #ffffff !important;
-        color: #000000 !important;
+    h3 {
+        font-weight: 400;
     }
     </style>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
+
 
 from biokit1.tools import (
     get_reverse_complement,
