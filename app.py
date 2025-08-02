@@ -5,37 +5,53 @@ import base64
 # Page config
 st.set_page_config(page_title="BioKit", layout="wide", page_icon="🧬")
 
-def set_bg_image(image_file):
+def set_responsive_background(image_file):
     with open(image_file, "rb") as img:
         encoded = base64.b64encode(img.read()).decode()
-    bg_css = f"""
+
+    responsive_bg_css = f"""
     <style>
     .stApp {{
-        background-image: url("data:image/jpg;base64,{encoded}");
+        background: url("data:image/jpg;base64,{encoded}") no-repeat center center fixed;
         background-size: cover;
-        background-attachment: fixed;
-        background-repeat: no-repeat;   
     }}
+
+    @media only screen and (max-width: 768px) {{
+        .stApp {{
+            background-size: contain;
+            background-position: top;
+        }}
+    }}
+
     [data-testid="stHeader"] {{
-        background-color: rgba(0,0,0,0);    
+        background-color: rgba(0, 0, 0, 0); /* transparent header */
     }}
+
+    .main {{
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 2rem;
+        border-radius: 10px;
+    }}
+
     h1, h3 {{
-        text-align: center;
-        color: #2b4162;
-        font-weight: 700;
         font-family: 'Segoe UI', sans-serif;
+        text-align: center;
+        color: #0e1c36;
+        font-weight: 700;
+        margin-bottom: 1rem;
     }}
+
     .stTextArea textarea {{
         background-color: #ffffff !important;
         color: #000000 !important;
     }}
     </style>
     """
-    st.markdown(bg_css, unsafe_allow_html=True)
 
-# Set the background image (leave unchanged)
-set_bg_image("images/pic31.jpg")
+    st.markdown(responsive_bg_css, unsafe_allow_html=True)
 
+
+set_responsive_background("images/pic31.jpg")
 # Style
 st.markdown(
     """
