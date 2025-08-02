@@ -119,7 +119,7 @@ with tab1:
             st.info("Please upload a valid FASTA file.")
 
     elif input_mode == "Write Your Own":
-         seq = dna_input_box(key = "biokit1")
+         seq = dna_input_box(key="biokit1")
         
     elif input_mode == "Use Sample Sequence":
         sample_dict = {
@@ -175,8 +175,8 @@ with tab1:
             }
 
         sample_choice = st.selectbox("Choose a sample sequence", list(sample_dict.keys()), key="sample_bio1")
-        user_seq = sample_dict[sample_choice]
-        st.code(user_seq, language="text")
+        seq = sample_dict[sample_choice]
+        st.code(seq, language="text")
 
 
     tool = st.selectbox("", [
