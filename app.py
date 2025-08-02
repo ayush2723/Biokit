@@ -34,7 +34,7 @@ def set_bg_image(image_file):
     st.markdown(bg_css, unsafe_allow_html=True)
 
 # Set the background image (leave unchanged)
-set_bg_image("pic31.jpg")
+set_bg_image("images/pic31.jpg")
 
 # Style
 st.markdown("""
