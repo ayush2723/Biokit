@@ -95,7 +95,7 @@ biokit/
 ## 🚀 Installation & Setup
 
 ### Prerequisites
-- Python 3.11 or higher
+- Python 3.12 or higher
 - pip package manager
 - Git (for cloning)
 
@@ -283,18 +283,6 @@ git checkout -b feature/new-algorithm
 - **Structural Biology**: Protein structure prediction
 - **Multi-omics**: Integration with transcriptomics data
 
-### Version 2.5 (In Development)
-- **Batch Processing**: Multiple sequence analysis
-- **API Integration**: RESTful API for programmatic access
-- **Cloud Deployment**: Scalable cloud infrastructure
-- **Advanced Visualization**: Interactive 3D plots
-
-## 📚 References & Citations
-
-### Core Algorithms
-- Z-Algorithm: Gusfield, D. (1997). Algorithms on Strings, Trees and Sequences
-- Shannon Entropy: Shannon, C.E. (1948). A Mathematical Theory of Communication
-- Codon Usage: Nakamura, Y. et al. (2000). Codon usage tabulated from international DNA sequence databases
 
 ### Biological Databases
 - REBASE: Roberts, R.J. et al. (2010). REBASE—a database for DNA restriction and modification enzymes
