@@ -108,13 +108,35 @@ with tab1:
     seq = ""
 
     if input_mode == "Upload FASTA File":
-        fasta_file = st.file_uploader("Upload a FASTA file", type=["fasta", "fa", "txt"], key="fasta_bio1")
+        fasta_file = st.file_uploader(
+            "Upload a FASTA file",
+            type=["fasta", "fa", "txt"],
+            key="fasta_bio1"
+        )
+
         if fasta_file:
-            content = fasta_file.read().decode("utf-8")
-            lines = content.splitlines()
-            seq = ''.join([line.strip() for line in lines if not line.startswith(">")])
-            st.success("FASTA file uploaded and parsed successfully.")
-            st.code(seq, language="text")
+            content = fasta_file.read().decode("utf-8", errors="ignore").strip().splitlines()
+
+            sequences = {}
+            current_header = None
+            for line in content:
+                line = line.strip()
+                if not line:
+                    continue
+                if line.startswith(">"):
+                    current_header = line[1:].strip()
+                    sequences[current_header] = ""
+                else:
+                    sequences[current_header] += line.replace(" ", "").upper()
+
+            if sequences:
+                if len(sequences) == 1:
+                    seq_name = list(sequences.keys())[0]
+                else:
+                    seq_name = st.selectbox("Select a sequence", list(sequences.keys()))
+                seq = sequences[seq_name]
+                st.success(f"Selected: {seq_name}")
+                st.code(seq, language="text")
         else:
             st.info("Please upload a valid FASTA file.")
 
@@ -319,13 +341,35 @@ with tab2:
     user_seq = ""
 
     if input_mode == "Upload FASTA File":
-        fasta_file = st.file_uploader("Upload a FASTA file", type=["fasta", "fa", "txt"], key="fasta_bio2")
+        fasta_file = st.file_uploader(
+            "Upload a FASTA file",
+            type=["fasta", "fa", "txt"],
+            key="fasta_bio2"
+        )
+
         if fasta_file:
-            content = fasta_file.read().decode("utf-8")
-            lines = content.splitlines()
-            user_seq = ''.join([line.strip() for line in lines if not line.startswith(">")])
-            st.success("FASTA file uploaded and parsed successfully.")
-            st.code(user_seq, language="text")
+            content = fasta_file.read().decode("utf-8", errors="ignore").strip().splitlines()
+
+            sequences = {}
+            current_header = None
+            for line in content:
+                line = line.strip()
+                if not line:
+                    continue
+                if line.startswith(">"):
+                    current_header = line[1:].strip()
+                    sequences[current_header] = ""
+                else:
+                    sequences[current_header] += line.replace(" ", "").upper()
+
+            if sequences:
+                if len(sequences) == 1:
+                    seq_name = list(sequences.keys())[0]
+                else:
+                    seq_name = st.selectbox("Select a sequence", list(sequences.keys()))
+                user_seq = sequences[seq_name]
+                st.success(f"Selected: {seq_name}")
+                st.code(user_seq, language="text")
         else:
             st.info("Please upload a valid FASTA file.")
 
